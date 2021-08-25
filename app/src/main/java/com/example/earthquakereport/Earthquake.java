@@ -1,26 +1,63 @@
 package com.example.earthquakereport;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Earthquake {
-
-private String mMagnitude;
+private final String LOCATION_SEPARATOR = " of ";
+private String primaryLocation;
+private String locationOffset;
+private Double mMagnitude;
 private String mLocation;
-private String mDate;
+private Long mTimeInMilliseconds;
 
-   public Earthquake(String Magnitude, String Location , String Date){
+   public Earthquake(Double Magnitude, String Location , Long TimeInMilliseconds){
        this.mMagnitude =Magnitude;
        this.mLocation = Location;
-       this.mDate =Date;
+       this.mTimeInMilliseconds =TimeInMilliseconds;
     }
-
     public String getMagnitude() {
-        return mMagnitude;
-    }
-
-    public String getLocation() {
-        return mLocation;
+        DecimalFormat formatter = new DecimalFormat("0.0");
+        return formatter.format(mMagnitude);
     }
 
     public String getDate() {
-        return mDate;
+       //Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+
+        Date dateObject = new Date(mTimeInMilliseconds);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        return dateFormat.format(dateObject);
     }
+    public String getTime() {
+       //Return the formatted date string (i.e. "4:30 PM") from a Date object.
+        Date dateObject = new Date(mTimeInMilliseconds);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return timeFormat.format(dateObject);
+    }
+
+    public String getLocationOffset() {
+
+        if (mLocation.contains(LOCATION_SEPARATOR)) {
+            String[]parts = mLocation.split(LOCATION_SEPARATOR);
+            locationOffset = parts[0] + LOCATION_SEPARATOR;
+            primaryLocation = parts[1];
+        } else {
+            locationOffset = "Near the";
+            primaryLocation = mLocation;
+        }
+        return locationOffset;
+    }
+    public String getPrimaryLocation(){
+
+        return primaryLocation;
+    }
+
+
+
+
+
+
+
 }

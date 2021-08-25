@@ -37,15 +37,27 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         //Display the magnitude of the current earthquake in that view
         magnitudeView.setText(currentEarthquake.getMagnitude());
 
-        //Find TextView with view id magnitude
-        TextView locationView = listItemView.findViewById(R.id.location);
-        //Display the magnitude of the current earthquake in that view
-        locationView.setText(currentEarthquake.getLocation());
+        //Find TextView with view id location
+        TextView offsetLocationView = listItemView.findViewById(R.id.location_offset);
+        //Display the location of the current earthquake in that view
+        offsetLocationView.setText(currentEarthquake.getLocationOffset());
 
-        //Find TextView with view id magnitude
+        //Find TextView with view id primary_location
+        TextView primaryLocationView = listItemView.findViewById(R.id.primary_location);
+        //Display the primary location of the current earthquake in that view
+        primaryLocationView.setText(currentEarthquake.getPrimaryLocation());
+
+        //Find TextView with view id date
         TextView dateView = listItemView.findViewById(R.id.date);
-        //Display the magnitude of the current earthquake in that view
+        //Display the date of the current earthquake in that view
         dateView.setText(currentEarthquake.getDate());
+
+        //Find TextView with view id time
+        TextView timeView = listItemView.findViewById(R.id.time);
+        //Display the time of the current earthquake in that view
+        timeView.setText(currentEarthquake.getTime());
+
+
 
         // Return the list item view
         return listItemView;
