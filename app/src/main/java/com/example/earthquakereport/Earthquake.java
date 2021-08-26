@@ -1,63 +1,46 @@
 package com.example.earthquakereport;
-
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Earthquake {
-private final String LOCATION_SEPARATOR = " of ";
-private String primaryLocation;
-private String locationOffset;
-private Double mMagnitude;
-private String mLocation;
-private Long mTimeInMilliseconds;
+private final Double mMagnitude;
+private final String mLocation;
+private final Long mTimeInMilliseconds;
+private final String mUrl;
 
-   public Earthquake(Double Magnitude, String Location , Long TimeInMilliseconds){
+    // Class constructor which take Double, String and Long as a arguments
+   public Earthquake(Double Magnitude, String Location , Long TimeInMilliseconds, String Url){
+
+       // Here setting global variables value to the argument received
        this.mMagnitude =Magnitude;
        this.mLocation = Location;
        this.mTimeInMilliseconds =TimeInMilliseconds;
-    }
-    public String getMagnitude() {
-        DecimalFormat formatter = new DecimalFormat("0.0");
-        return formatter.format(mMagnitude);
+       this.mUrl = Url;
     }
 
-    public String getDate() {
-       //Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
-
-        Date dateObject = new Date(mTimeInMilliseconds);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
-        return dateFormat.format(dateObject);
-    }
-    public String getTime() {
-       //Return the formatted date string (i.e. "4:30 PM") from a Date object.
-        Date dateObject = new Date(mTimeInMilliseconds);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
+    /**
+     * * @return the Magnitude in double format (eg : 7.21 )
+     */
+    public Double getMagnitude() {
+       return mMagnitude;
     }
 
-    public String getLocationOffset() {
-
-        if (mLocation.contains(LOCATION_SEPARATOR)) {
-            String[]parts = mLocation.split(LOCATION_SEPARATOR);
-            locationOffset = parts[0] + LOCATION_SEPARATOR;
-            primaryLocation = parts[1];
-        } else {
-            locationOffset = "Near the";
-            primaryLocation = mLocation;
-        }
-        return locationOffset;
-    }
-    public String getPrimaryLocation(){
-
-        return primaryLocation;
+    /**
+     * * @return  the time long format, in Unix time stamp (eg ;121212123123)
+     */
+    public Long getTimeInMilliseconds() {
+       return mTimeInMilliseconds;
     }
 
+    /**
+     * * @return the location in String format (Eg: 88Km N of Yelizovo, Russia )
+     */
+    public String getLocation() {
+       return mLocation;
+    }
+    /**
+     * * @return the url in String format
+     * (Eg: http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20004uks&format=geojson)
+     */
 
-
-
-
-
-
+    public String getUrl() {
+        return mUrl;
+    }
 }
